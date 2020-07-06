@@ -34,7 +34,7 @@ DOWNLOAD_DELAY = 1
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
 
-# Disable cookies (enabled by default)
+# Disable cookies (enabled by default)s
 #COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
@@ -56,8 +56,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 }
 HTTP_PROXY_LIST = [
-     'http://52.179.231.206:80',
-     'http://95.0.194.241:9090',
+    'http://52.179.231.206:80',
+    'http://95.0.194.241:9090',
+    
 ]
 
 # Enable or disable downloader middlewares
@@ -74,8 +75,26 @@ HTTP_PROXY_LIST = [
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
+# redis信息
+REDIS_HOST='127.0.0.1'
+REDIS_PORT=6379
+
+# Scheduler的QUEUE
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
+# 去重
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+# Requests的默认优先级队列
+SCHEDULER_QUEUE_CLASS = 'scrapy_redis.queue.PriorityQueue'
+
+# 将Requests队列持久化到Redis，可支持暂停或重启爬虫
+SCHEDULER_PERSIST = True
+
+# 将爬取到的items保存到Redis
 ITEM_PIPELINES = {
-    'douban.pipelines.DoubanPipeline': 300,
+    'scrapy_redis.pipelines.RedisPipeline': 300,
+    'douban.pipelines.DoubanPipeline': 301,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -98,3 +117,4 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+

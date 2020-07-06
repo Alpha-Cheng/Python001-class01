@@ -51,3 +51,10 @@ class DoubanPipeline:
         #    article.write(output)
         #    article.close()
         return item 
+        
+#  redis 存储了item
+#  bash$  redis-cli
+#  redis> keys *
+#  redis> type cluster:items
+#  redis> lpop cluster:items
+#  redis> keys *

@@ -10,7 +10,7 @@ class HttpbinSpider(scrapy.Spider):
     name = 'httpbin'
     allowed_domains = ['httpbin.org']
     # 通过ip查看请求的ip地址
-    start_urls = ['http://httpbin.org/ip']
+    start_urls = ['https://httpbin.org/ip']
     # 通过header 查看user-agent
     # start_urls = ['http://httpbin.org/headers']
 
