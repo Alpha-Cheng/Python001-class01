@@ -7,7 +7,7 @@
 
 import pandas as pd
 import pymysql
-
+from redis import StrictRedis 
 # 执行批量插入
 # values = [(id,'testuser'+str(id)) for id in range(4, 21) ]
 # cursor.executemany('INSERT INTO '+ TABLE_NAME +' values(%s,%s)' ,values)
@@ -45,7 +45,15 @@ class DoubanPipeline:
             print(e,'操作失败====================================')
         con1.close()
         conn.close()
+    
 
+    
+        # rt = {'title': item['title'],'mold': item['mold'],'release_time': item['release_time']}
+        # #写数据到Redis
+        # idkey = 'douban_movie'
+        # #hash表数据写入命令hmget，可以一次写入多个键值对
+        # print(r.hmget(idkey,rt))
+        
         #output = f'|{title}|\t|{link}|\t|{mold}|\t|{release_time}|\n\n'
         #with open('./doubanmovie.txt', 'a+', encoding='utf-8') as article:
         #    article.write(output)

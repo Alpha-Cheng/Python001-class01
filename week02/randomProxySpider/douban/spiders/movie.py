@@ -15,6 +15,7 @@ class MovieSpider(scrapy.Spider):
     
         url = 'https://movie.douban.com/top250'
         yield scrapy.Request(url=url, callback=self.parse,dont_filter=True)
+        
             # url 请求访问的网址
             # callback 回调函数，引擎回将下载好的页面(Response对象)发给该方法，执行数据解析
             # 这里可以使用callback指定新的函数，不是用parse作为默认的回调参数
