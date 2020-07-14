@@ -25,13 +25,18 @@ class RandomHttpProxyMiddleware(HttpProxyMiddleware):
         if not crawler.settings.get('HTTP_PROXY_LIST'):
             raise NotConfigured
 
-        http_proxy_list = crawler.settings.get('HTTP_PROXY_LIST')  
+        http_proxy_list = crawler.settings.get('HTTP_PROXY_LIST')
+        print('='*30)  
+        print(http_proxy_list)
+        print('='*30)  
         auth_encoding = crawler.settings.get('HTTPPROXY_AUTH_ENCODING', 'utf-8')
 
         return cls(auth_encoding, http_proxy_list)
 
     def _set_proxy(self, request, scheme):
         proxy = random.choice(self.proxies[scheme])
+        print(proxy)
+        print('='*30)  
         request.meta['proxy'] = proxy
 
 class DoubanSpiderMiddleware:
