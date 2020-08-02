@@ -33,23 +33,6 @@ Diango web
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 1、Django安装
 2、Django目录结构
 3、URL规则
