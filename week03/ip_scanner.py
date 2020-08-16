@@ -1,6 +1,6 @@
 import getopt
-import sys, random
-import tools, os
+import sys, random, os
+from . import tools
 from time import sleep, time
 from multiprocessing import Process, Lock
 
