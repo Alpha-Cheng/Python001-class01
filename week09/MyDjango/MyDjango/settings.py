@@ -19,37 +19,27 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
-# 生产模式的密钥，防止跨站攻击
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'yc$_u#rzf24@bl=b+v(a2rw+w+wgp@nudphmbm4cw7l*rs_162'
+SECRET_KEY = '_-$ioq56likj*48x$x10@e_c^*dshvn(9*k4dk294e@uo!w5!('
 
-# 调试模式
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-# 域名访问权限
+
 ALLOWED_HOSTS = []
 
-# app列表
+
 # Application definition
 
 INSTALLED_APPS = [
-    # 内置的后台管理系统
     'django.contrib.admin',
-    # 内置的用户认证系统
     'django.contrib.auth',
-    # 所有model元数据
     'django.contrib.contenttypes',
-    # 会话，表示当前访问网站的用户身份
     'django.contrib.sessions',
-    # 消息提示
     'django.contrib.messages',
-    # 静态资源路径
     'django.contrib.staticfiles',
-    # 自己注册的app
-    'index',
-    # 'Douban',
+    'myapp',
 ]
-# 中间件是request和response对象之间的钩子
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -64,13 +54,9 @@ ROOT_URLCONF = 'MyDjango.urls'
 
 TEMPLATES = [
     {
-        # 定义模板的引擎
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        # 设置模板路径
         'DIRS': [],
-        # 是否在app里查找模板文件
         'APP_DIRS': True,
-        # 用于RequestContext上下文的调用
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -82,25 +68,12 @@ TEMPLATES = [
     },
 ]
 
-# 生产模式配置
 WSGI_APPLICATION = 'MyDjango.wsgi.application'
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-# export PATH=$PATH:/usr/local/mysql/bin
-# OSError: mysql_config not found
-# pip install mysqlclient
-# pip install mysqldb
-# pip install pymysql
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -110,22 +83,11 @@ DATABASES = {
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
-    # 生产环境有可能连接第二个数据库
-    # 'db2': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'mydatabase',
-    #     'USER': 'mydatabaseuser',
-    #     'PASSWORD': 'mypassword',
-    #     'HOST': '127.0.0.1',
-    #     'PORT': '3307',
-    # }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
-# 密码验证
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -145,11 +107,10 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-# 语言编码
 LANGUAGE_CODE = 'en-us'
-# 时区
+
 TIME_ZONE = 'UTC'
-# 国际化设置
+
 USE_I18N = True
 
 USE_L10N = True
@@ -160,5 +121,4 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# 静态加载的文件目录
 STATIC_URL = '/static/'

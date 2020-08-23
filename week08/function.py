@@ -15,6 +15,9 @@
 
 # --------------------------------------------------------------------------------
 
+
+
+
 # question_1
 
 # 容器序列：list、tuple、collections.deque ，能存放不同类型的数据容器序列可以存 放不同类型的数据
@@ -56,7 +59,7 @@ print(d)
 # print(list(map(square, number))) 
 # print(dir(map(square, number))) 
 
-import math
+
 def sque_1(parameter_list):
     return parameter_list**3
 m = map(sque_1, range(10))
@@ -65,7 +68,12 @@ list(m)
 [sque_1(parameter_list) for parameter_list in range(10)]
 
 
+
+
+
+
 # question_3
+
 import time
 def timer(func):
     def inner3(*args,**kwargs):
@@ -77,6 +85,6 @@ def timer(func):
 
 @timer
 def mul_tab(a,b,c):
-    print (a**b**c+b**a**c+a**c**b+b**c**a)
+    print(a**b**c+b**a**c+a**c**b+b**c**a)
     
 mul_tab(3,3,5)

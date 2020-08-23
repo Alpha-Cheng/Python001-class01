@@ -58,7 +58,7 @@ class animal(object):
         self.size = animal.size_dict[size]
         self.is_fierce = animal.is_fierce_dict[is_fierce]
         if (self.size >=2) and (self.eat_meat == True) and (self.is_fierce == True):
-            self.is_firece_animal = True
+            self.is_fierce_animal = True
         else:
             self.is_fierce_animal = False
 

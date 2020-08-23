@@ -17,4 +17,3 @@ class T1(models.Model):
     class Meta:
         managed = False
         db_table = 't1'
-
