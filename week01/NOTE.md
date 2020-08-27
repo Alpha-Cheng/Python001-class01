@@ -23,11 +23,12 @@
     pip install scrapy
     pip install -r requirements.txt
 3. 创建项目
-    scrapy startproject spiders
-    scrapy genspider example example.com
+    创建爬虫项目scrapy startproject spiders
+    创建目标模块scrapy genspider example example.com
 4. 运行爬虫
     scrapy crawl movie
 
+推导式是为了创建新的字典，列表，集合的
     
 bs4 是python实现的  lxml是用c语言实现的
 ## 作业一：

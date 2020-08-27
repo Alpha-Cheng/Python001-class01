@@ -26,3 +26,13 @@
 
 ## 注意事项
  如果对 Git 和 GitHub 不太了解，请参考 [Git 官方文档](https://git-scm.com/book/zh/v2) 或者极客时间的[《玩转 Git 三剑客》](https://time.geekbang.org/course/intro/145)视频课程。
+
+```python
+    pyautogui & pywinauto 用于协作 windows 的包
+    xlrd 读取 excel2013以上版本的 .exl
+    read_excel 最高支持 excel2013 的 .exl
+    pip install pypiwin32 读取 .exl
+    pandas 打开 .exl pd.read_excel(password) ~ 如果加密的话，需要写密码参数
+
+    win32com.client.Dispatch('Excel.Application') 的确可以去除密码
+```

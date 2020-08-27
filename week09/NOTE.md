@@ -46,7 +46,7 @@
 5. 准备要使用的用户名密码
   - 在数据库中创建要使用到的表,通过下面命令自动创建Django默认使用的用户表
   ```shell
-  python manage.pymakemigrations 
+  python manage.py makemigrations 
   python manage.py migrate
   ```
   - 创建Django管理员用户
@@ -140,3 +140,4 @@ urlpatterns = [
     </body>
     </html>
 ```
+python manage.py runserver
