@@ -34,35 +34,43 @@
     scrapy startproject qipaoshui
     scrapy genspider smzdm www.smzdm.com/fenlei/qipaoshui
 ```
+1. 正确使用 Scrapy 框架获取评论，如果评论有多页，需实现自动翻页功能。              # 第一遍存储评论
+2. 评论内容能够正确存储到 MySQL 数据库中，不因表结构不合理出现数据截断情况。        # 第一遍存储评论
+3. 数据清洗后，再次存储的数据不应出现缺失值。                                     # 第二遍处理评论后第二此存储
+4. Django 能够正确运行，并展示采集到的数据，数据不应该有乱码、缺失等问题。          # 第二遍分析和展示评论
+5. 在 Django 上采用图表方式展示数据分类情况。                                    # 第二遍展示评论分析结论数据
+6. 舆情分析的结果存入到 MySQL 数据库中。                                         # 第二遍展示评论分析结论数据
+7. 在 Django 上采用图表方式展示舆情分析的结果。                                  # 第二遍展示评论分析结论数据
+8. 可以在 Web 界面根据关键字或关键词进行搜索，并能够在页面展示正确的搜索结果。      # 第三遍实现特殊功能
+9. 支持按照时间（录入时间或评论时间）进行搜索，并能够在页面展示正确的搜索结果。      # 第三遍实现特殊功能
+10. 符合 PEP8 代码规范，函数、模块之间的调用高内聚低耦合，具有良好的扩展性和可读性。 # 第三遍优化代码格式和逻辑
+
+# 作业完成过程
+## 暂存区
+ 
+
+## 爬取数据放入数据库
+
+### 创建scrapy爬虫
+```shell
+    scrapy -help
+    scrapy startproject qipaoshui
+    scrapy genspider smzdm www.smzdm.com/fenlei/qipaoshui
+```
 ### 获取评论
 ```python
-    def start_requests(self):
-        for i in range(1,2):
-            url = f'https://smzdm.com/fenlei/qipaoshui/p{i}/#feed-main'
-            yield scrapy.Request(url = url, callback = self.parse,dont_filter = True)
-            # url 请求访问的网址
-            # callback 回调函数，引擎回将下载好的页面(Response对象)发给该方法，执行数据解析
-            # 这里可以使用callback指定新的函数，不是用parse作为默认的回调参数
-            # dont_filter = false 代表打开请求过滤，请求次数过多就会被拦截
-    # 解析函数
-    def parse(self, response):
-        item = QipaoshuiItem()
-        links = Selector(response=response).xpath('//li[@class="feed-row-wide"]/div/div[1]/a/@href').extract()
-        for i in range(0,30):
-            link = links[i]
-            item['link'] = link
-            yield scrapy.Request(url = link, meta = {'item': item}, callback = self.parse2,dont_filter = True)
-    
-    # 解析具体页面
-    def parse2(self, response):
-        item = response.meta['item']
-        # xml化处理
-        estimates = Selector(response=response).xpath('//span[@itemprop="description"]/text()').extract()
-        print(estimates)
-        for i in range(0,len(estimates)):
-            estimate = estimates[i]
-            item['estimate'] = estimate
-            yield item
+    for i in range(0,30):
+            print('='*50)
+            for j in range(0,len(self.max_collect)):
+                if int(collects[i]) > int(self.max_collect[j]):
+                    self.max_link.insert(j,links[i])
+                    self.max_collect.insert(j,collects[i])
+        
+        for i in range(0,10):
+            print('~'*50)
+            item['collect'] = self.max_collect[i]
+            yield scrapy.Request(url = self.max_link[i], meta = {'item': item}, callback = self.parse2,dont_filter = True)
+
 ```
 ### 运行爬虫获取数据
 ```shell
@@ -84,6 +92,12 @@
     * python manage.py makemigrations 
     * python manage.py migrate
 
+### pip install snownlp
+
+    *python manage.py runserver
+    *python manage.py inspectdb
+
+
 
 
 常见报错
@@ -103,3 +117,128 @@
     # if query is not None:
     #     query = query.decode(errors='replace')
     return query
+
+
+```python
+    
+result = self._query(query)
+
+
+class AuthGroup(models.Model):
+    name = models.CharField(unique=True, max_length=150)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group'
+
+
+class AuthGroupPermissions(models.Model):
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_group_permissions'
+        unique_together = (('group', 'permission'),)
+
+
+class AuthPermission(models.Model):
+    name = models.CharField(max_length=255)
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
+    codename = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_permission'
+        unique_together = (('content_type', 'codename'),)
+
+
+class AuthUser(models.Model):
+    password = models.CharField(max_length=128)
+    last_login = models.DateTimeField(blank=True, null=True)
+    is_superuser = models.IntegerField()
+    username = models.CharField(unique=True, max_length=150)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=150)
+    email = models.CharField(max_length=254)
+    is_staff = models.IntegerField()
+    is_active = models.IntegerField()
+    date_joined = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user'
+
+
+class AuthUserGroups(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_groups'
+        unique_together = (('user', 'group'),)
+
+
+class AuthUserUserPermissions(models.Model):
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+    permission = models.ForeignKey(AuthPermission, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'auth_user_user_permissions'
+        unique_together = (('user', 'permission'),)
+
+
+class DjangoAdminLog(models.Model):
+    action_time = models.DateTimeField()
+    object_id = models.TextField(blank=True, null=True)
+    object_repr = models.CharField(max_length=200)
+    action_flag = models.PositiveSmallIntegerField()
+    change_message = models.TextField()
+    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
+    user = models.ForeignKey(AuthUser, models.DO_NOTHING)
+
+    class Meta:
+        managed = False
+        db_table = 'django_admin_log'
+
+
+class DjangoContentType(models.Model):
+    app_label = models.CharField(max_length=100)
+    model = models.CharField(max_length=100)
+
+    class Meta:
+        managed = False
+        db_table = 'django_content_type'
+        unique_together = (('app_label', 'model'),)
+
+
+class DjangoMigrations(models.Model):
+    app = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    applied = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_migrations'
+
+
+class DjangoSession(models.Model):
+    session_key = models.CharField(primary_key=True, max_length=40)
+    session_data = models.TextField()
+    expire_date = models.DateTimeField()
+
+    class Meta:
+        managed = False
+        db_table = 'django_session'
+
+
+class QipaoshuiQipaoshui(models.Model):
+    collect = models.IntegerField()
+    estimate = models.TextField()
+    sentiment = models.FloatField()
+
+    class Meta:
+        managed = False
+```

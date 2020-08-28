@@ -18,18 +18,21 @@ class QipaoshuiPipeline:
                         port = 3306,
                         user = 'root',
                         password = '123456',
-                        database = 'test',
+                        database = 'django',
                         charset = 'utf8mb4'
                         )
         sql=''' CREATE TABLE IF NOT EXISTS `qipaoshui_qipaoshui`(
                 `id` INT UNSIGNED AUTO_INCREMENT,
+                `collect` int(30) not null,
                 `estimate` LONGTEXT NOT NULL,
+                `sentiment` FLOAT(12,10) not null,
                 PRIMARY KEY ( `id` )
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'''
         
         #sql1="INSERT INTO douban(`title`,`mold`,`release_time`) VALUES('{title}', '{mold}', '{release_time}')",(item['title'],item['mold'],item['release_time']);
         # sql1="INSERT INTO douban(`title`,`mold`,`release_time`) VALUES ('{title}', '{mold}', '{release_time}')".format(title=item['title'], mold=' '.join(item['mold']), release_time=' '.join(item['release_time']));
-        sql1="INSERT INTO qipaoshui_qipaoshui(`estimate`) VALUES ('{estimate}')".format(estimate=item['estimate']);
+        sql1="INSERT INTO `qipaoshui_qipaoshui`(`collect`, `estimate`, `sentiment`) VALUES ('{collect}','{estimate}','{sentiment}')".format(collect=item['collect'], estimate=item['estimate'], sentiment=item['sentiment']);
+        # sql1="INSERT INTO qipaoshui_qipaoshui(`estimate`) VALUES ('{estimate}')".format(estimate=item['estimate']);
         try:
             # 获得cursor游标对象
             con1 = conn.cursor()
