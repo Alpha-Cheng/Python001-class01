@@ -25,7 +25,7 @@ class QipaoshuiPipeline:
                 `id` INT UNSIGNED AUTO_INCREMENT,
                 `collect` int(30) not null,
                 `estimate` LONGTEXT NOT NULL,
-                `sentiment` FLOAT(12,10) not null,
+                `sentiment` decimal(11,10) not null,
                 PRIMARY KEY ( `id` )
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'''
         

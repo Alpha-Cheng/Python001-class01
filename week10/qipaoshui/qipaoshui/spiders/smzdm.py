@@ -1,4 +1,5 @@
 import scrapy
+import pandas as pd
 from snownlp import SnowNLP
 from scrapy.selector import Selector
 from qipaoshui.items import QipaoshuiItem
@@ -30,14 +31,17 @@ class SmzdmSpider(scrapy.Spider):
     def parse2(self, response):
         item = response.meta['item']
         # xml化处理
-        estimates = Selector(response=response).xpath('//span[@itemprop="description"]/text()').extract()
+        est = Selector(response=response).xpath('//span[@itemprop="description"]/text()').extract()
+        estimates = pd.Series(est)
         print(estimates)
         def _sentiment(text):
             s = SnowNLP(text)
             return s.sentiments
         item['collect'] = len(estimates)
         for i in range(0,len(estimates)):
-            estimate = estimates[i]
+            estimate = estimates[i].strip()
+            if len(estimate) == 0:
+                continue
             sentiment = _sentiment(estimates[i])
             item['estimate'] = estimate
             item['sentiment'] = sentiment
