@@ -5,7 +5,6 @@
 
 
 # useful for handling different item types with a single interface
-import pandas as pd
 import pymysql
 from itemadapter import ItemAdapter
 # 执行批量插入
@@ -23,7 +22,7 @@ class QipaoshuiPipeline:
                         )
         sql=''' CREATE TABLE IF NOT EXISTS `qipaoshui_qipaoshui`(
                 `id` INT UNSIGNED AUTO_INCREMENT,
-                `collect` int(30) not null,
+                `n_star` int(30) not null,
                 `estimate` LONGTEXT NOT NULL,
                 `sentiment` decimal(11,10) not null,
                 PRIMARY KEY ( `id` )
@@ -31,7 +30,7 @@ class QipaoshuiPipeline:
         
         #sql1="INSERT INTO douban(`title`,`mold`,`release_time`) VALUES('{title}', '{mold}', '{release_time}')",(item['title'],item['mold'],item['release_time']);
         # sql1="INSERT INTO douban(`title`,`mold`,`release_time`) VALUES ('{title}', '{mold}', '{release_time}')".format(title=item['title'], mold=' '.join(item['mold']), release_time=' '.join(item['release_time']));
-        sql1="INSERT INTO `qipaoshui_qipaoshui`(`collect`, `estimate`, `sentiment`) VALUES ('{collect}','{estimate}','{sentiment}')".format(collect=item['collect'], estimate=item['estimate'], sentiment=item['sentiment']);
+        sql1="INSERT INTO `qipaoshui_qipaoshui`(`n_star`, `estimate`, `sentiment`) VALUES ('{n_star}','{estimate}','{sentiment}')".format(n_star=item['n_star'], estimate=item['estimate'], sentiment=item['sentiment']);
         # sql1="INSERT INTO qipaoshui_qipaoshui(`estimate`) VALUES ('{estimate}')".format(estimate=item['estimate']);
         try:
             # 获得cursor游标对象

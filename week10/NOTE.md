@@ -80,6 +80,8 @@
 
 ## 创建Django项目
 
+django-admin : admin 123456
+
 ### 创建 Django 项目 
     *django-admin startproject MyDjango
 

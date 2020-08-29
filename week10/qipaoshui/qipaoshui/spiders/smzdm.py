@@ -14,7 +14,7 @@ class SmzdmSpider(scrapy.Spider):
     
     # 初始化函数，只执行一次
     def start_requests(self):
-        for i in range(1,2):
+        for i in range(1,5):
             url = f'https://smzdm.com/fenlei/qipaoshui/p{i}/#feed-main'
             yield scrapy.Request(url = url, callback = self.parse,dont_filter = True)
         
@@ -37,12 +37,11 @@ class SmzdmSpider(scrapy.Spider):
         def _sentiment(text):
             s = SnowNLP(text)
             return s.sentiments
-        item['collect'] = len(estimates)
         for i in range(0,len(estimates)):
             estimate = estimates[i].strip()
-            if len(estimate) == 0:
-                continue
+            if len(estimate) == 0:continue
             sentiment = _sentiment(estimates[i])
-            item['estimate'] = estimate
+            item['n_star'] = sentiment // 0.2 + 1
             item['sentiment'] = sentiment
+            item['estimate'] = estimate
             yield item
