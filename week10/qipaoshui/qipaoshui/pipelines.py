@@ -22,16 +22,17 @@ class QipaoshuiPipeline:
                         )
         sql=''' CREATE TABLE IF NOT EXISTS `qipaoshui_qipaoshui`(
                 `id` INT UNSIGNED AUTO_INCREMENT,
-                `n_star` int(30) not null,
-                `estimate` LONGTEXT NOT NULL,
+                `date` varchar(30) not null,
+                `n_star` int(5) not null,
+                `sum_i` int(20) not null,
+                `link` varchar(40) not null,
+                `estimate` varchar(200) NOT NULL,
                 `sentiment` decimal(11,10) not null,
                 PRIMARY KEY ( `id` )
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'''
+                # 'INSERT `qipaoshui_qipaoshui` SELECT * FROM `qipaoshui_base` GROUP BY RAND();'
+        sql1="INSERT INTO `qipaoshui_qipaoshui`(`date`, `n_star`,`sum_i`, `link`,`estimate`, `sentiment`) VALUES ('{date}','{n_star}','{sum_i}', '{link}','{estimate}','{sentiment}')".format(date=item['date'], n_star=item['n_star'], sum_i=item['sum_i'], link=item['link'], estimate=item['estimate'], sentiment=item['sentiment']);
         
-        #sql1="INSERT INTO douban(`title`,`mold`,`release_time`) VALUES('{title}', '{mold}', '{release_time}')",(item['title'],item['mold'],item['release_time']);
-        # sql1="INSERT INTO douban(`title`,`mold`,`release_time`) VALUES ('{title}', '{mold}', '{release_time}')".format(title=item['title'], mold=' '.join(item['mold']), release_time=' '.join(item['release_time']));
-        sql1="INSERT INTO `qipaoshui_qipaoshui`(`n_star`, `estimate`, `sentiment`) VALUES ('{n_star}','{estimate}','{sentiment}')".format(n_star=item['n_star'], estimate=item['estimate'], sentiment=item['sentiment']);
-        # sql1="INSERT INTO qipaoshui_qipaoshui(`estimate`) VALUES ('{estimate}')".format(estimate=item['estimate']);
         try:
             # 获得cursor游标对象
             con1 = conn.cursor()

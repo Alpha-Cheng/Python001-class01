@@ -29,7 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
-
+# 先后顺序，影响静态页面的先后加载问题
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'shouji',
     'qipaoshui',
 ]
 
@@ -73,7 +74,7 @@ WSGI_APPLICATION = 'MyDjango.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
+# mysql 引擎设置是一个容易忽略的问题
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',

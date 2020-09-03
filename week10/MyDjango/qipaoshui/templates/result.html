@@ -6,9 +6,77 @@
     <link rel="stylesheet" href="{% static 'css/morris.css' %}">
 {% endblock %} 
 {% block content %}
+<script>
+    let mysql=require('mysql');
+    let conn = mysql.createConnection({
+        driver: 'MySQL ODBC 8.0.20 Driver',
+        host:'localhost',
+        user:'root',
+        password:'123456',
+        port:'3306',
+        database:'django',
+    });
+    conn.connect();
+    let sel='select date from shouji_shouji';
+    conn.query(sql,function(err,res){
+        if(err){
+            console.log('连接失败')
+        }
+        console.log(res)
+    })
+</script>  
+<script language="javascript">
+    //创建数据库连接对象
+    var conn = new ActiveXObject("ADODB.Connection");
+    //创建数据集对象
+    var rs = new ActiveXObject("ADODB.Recordset");
+    try{
+    //数据库连接串，具体配置请参考：http://www.connectionstrings.com/
+    //如果不知道如何配置连接串，可以通过配置UDL文件后用文本编辑器打开获得
+    conn.ConnectionString = "Driver={MySQL ODBC 8.0.20 Driver};Option=3;Server=127.0.0.1;User=root;Password=123456;Database=django;Port=3306";  
+    //打开连接
+    conn.open(connectionstring);
+    //查询语句
+    var sql="select * from shouji_shouji";
+    //打开数据集（即执行查询语句）
+    rs.open(sql, conn);
+    // (或者rs=conn.execute(sql);)
+    //遍历所有记录
+    while(!rs.eof){
+    //WScript是Windows 的脚本宿主对象，详细情况请在windows帮助里查找。
+    //WScript.Echo输出记录的内容
+    WScript.Echo(rs.Fields("id") + "\t" + rs.Fields("date") + "\t" + rs.Fields("estimate") + rs.Fields("sentiment") + "\n");
+    //下一条记录
+    rs.moveNext();
+    }
+    // while (!rs.eof) {
+    // var u = rs.Fields("User");
+    // document.write(u);
+    // rs.moveNext();
+    // }
+    //关闭记录集
+    rs.close();
+    rs = null; 
+    //关闭数据库连接
+    conn.close();
+    conn = null;
+    } catch(e){
+    //异常报告
+    document.write(e.message);
+    WScript.Echo(e.message);
+    } finally{
+    //
+    }
+</script>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Dashboard</h1>
+        <form>
+            <input type="text" value="请输入关键词" class="input_text" id="input_text">请输入起始日期：
+            <input type="text" value="年/月/日" class="start_time" id="start_time">请输入结束日期：
+            <input type="text" value="年/月/日" class="last_time" id="last_time">
+            <input type="submit" value="Submit">
+        </form>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -120,7 +188,8 @@
                                 <thead>
                                     <tr>
                                         <th>id</th>
-                                        <th>star</th>
+                                        <th>评论时间</th>
+                                        <th>饮料地址</th>
                                         <th>评论</th>
                                         <th>情感倾向</th>
                                     </tr>
@@ -129,7 +198,8 @@
                                     {% for short in shorts %}
                                         <tr>
                                             <td>{{short.id}}</td>
-                                            <td>{{short.n_star}}</td>
+                                            <td>{{short.date}}</td>
+                                            <td>{{short.link}}</td>
                                             <td>{{short.estimate}}</td>
                                             <td>{{short.sentiment}}</td>
                                         </tr>

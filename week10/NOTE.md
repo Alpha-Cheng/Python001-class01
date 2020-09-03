@@ -32,7 +32,9 @@
 ```shell
     scrapy -help
     scrapy startproject qipaoshui
-    scrapy genspider smzdm www.smzdm.com/fenlei/qipaoshui
+    scrapy genspider smzdm smzdm.com/fenlei/qipaoshui
+    scrapy startproject shouji
+    scrapy genspider smzdm smzdm.com/fenlei/zhinengshouji/h5c4s0f0t0p1/#feed-main/
 ```
 1. 正确使用 Scrapy 框架获取评论，如果评论有多页，需实现自动翻页功能。   v           # 第一遍存储评论
 2. 评论内容能够正确存储到 MySQL 数据库中，不因表结构不合理出现数据截断情况。   v     # 第一遍存储评论
@@ -98,6 +100,12 @@ django-admin : admin 123456
 
     *python manage.py runserver
     *python manage.py inspectdb
+
+
+
+
+### pip install apscheduler 定时任务框架
+
 
 
 

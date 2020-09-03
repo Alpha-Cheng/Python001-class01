@@ -11,6 +11,9 @@ class QipaoshuiItem(scrapy.Item):
     # name = scrapy.Field()
     # pass
     link = scrapy.Field()
+    date = scrapy.Field()
+    sum_i = scrapy.Field()
     n_star = scrapy.Field()
     estimate = scrapy.Field()
     sentiment = scrapy.Field()
+    

@@ -14,7 +14,7 @@ from django.contrib.auth import authenticate,login
 # def tables_url(requset):
 #     return render(requset,'tables.html')
 
-def login_url(request):
+def login_url(request,login):
     if request.method == 'POST':
         login_form = LoginForm(request.POST)
         if login_form.is_valid():
@@ -23,7 +23,7 @@ def login_url(request):
             user = authenticate(username=cd['username'], password=cd['password'])
             if user:
                 login(request, user)
-                return render(request, '/index.html')
+                return render(request, 'index.html')
             else:
                 return render(request, 'file.html', {'form': login_form})
     if request.method == "GET":
@@ -49,5 +49,5 @@ def estimate_url(requset):
     minus = queryset.filter(**condtions).count()
     return render(requset,'result.html',locals())
 
-def index_url(request):
+def index_url(request,year):
     return render(request, 'index.html')
