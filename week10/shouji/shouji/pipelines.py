@@ -20,7 +20,8 @@ class ShoujiPipeline:
                         database = 'django',
                         charset = 'utf8mb4'
                         )
-        sql=''' CREATE TABLE IF NOT EXISTS `shouji_shouji`(
+        sql = 'DROP TABLE shouji_shouji;'
+        sql1 = ''' CREATE TABLE IF NOT EXISTS `shouji_shouji`(
                 `id` INT UNSIGNED AUTO_INCREMENT,
                 `date` varchar(30) not null,
                 `n_star` int(5) not null,
@@ -29,7 +30,7 @@ class ShoujiPipeline:
                 PRIMARY KEY ( `id` )
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'''
                 # 'INSERT `qipaoshui_qipaoshui` SELECT * FROM `qipaoshui_base` GROUP BY RAND();'
-        sql1="INSERT INTO `shouji_shouji`(`date`, `n_star`, `estimate`, `sentiment`) VALUES ('{date}','{n_star}', '{estimate}', '{sentiment}')".format(date=item['date'], n_star=item['n_star'], estimate=item['estimate'], sentiment=item['sentiment']);
+        sql2 = "INSERT INTO `shouji_shouji`(`date`, `n_star`, `estimate`, `sentiment`) VALUES ('{date}','{n_star}', '{estimate}', '{sentiment}')".format(date=item['date'], n_star=item['n_star'], estimate=item['estimate'], sentiment=item['sentiment']);
         
         try:
             # 获得cursor游标对象
@@ -37,6 +38,7 @@ class ShoujiPipeline:
             # 操作的行数
             con1.execute(sql)
             con1.execute(sql1)
+            con1.execute(sql2)
             conn.commit()
         except Exception as e:
             print(sql1)

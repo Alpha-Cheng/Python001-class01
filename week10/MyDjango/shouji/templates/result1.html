@@ -147,7 +147,7 @@
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-8">
-
+        
         <div class="panel panel-default">
             <div class="panel-heading">
                 <i class="fa fa-bar-chart-o fa-fw"></i> 舆情数据展示
@@ -167,12 +167,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        {% for short in shorts %}
-                                            <tr>
-                                                <td>{{short.id}}</td>
-                                                <td>{{short.date}}</td>
-                                                <td>{{short.estimate}}</td>
-                                                <td>{{short.sentiment}}</td>
+                                    {{ point }}
+                                    {% for short in shorts %}
+                                    <tr>
+                                        <td>{{short.id}}</td>
+                                        <td>{{short.date}}</td>
+                                        <td>{{short.estimate}}</td>
+                                        <td>{{short.sentiment}}</td>
                                             </tr>
                                         {% endfor %}
                                 </tbody>

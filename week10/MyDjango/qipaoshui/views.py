@@ -8,29 +8,50 @@ from django.http import HttpResponse, HttpResponseRedirect
 from .form import LoginForm
 from django.contrib.auth import authenticate,login
 # result.html
-
-
+# from .models import UserProfile
+from .models import MyBackend
 
 # def tables_url(requset):
 #     return render(requset,'tables.html')
 
-def login_url(request,login):
+def login_url(request):
     if request.method == 'POST':
+        print('-'*50)
         login_form = LoginForm(request.POST)
-        if login_form.is_valid():
+        print(login_form)
+        if login_form.is_valid:
+            cd = login_form.cleaned_data
+            print(cd)
             # 读取表单的返回值
-            cd = login_form.cleaned_data 
-            user = authenticate(username=cd['username'], password=cd['password'])
+            user = authenticate(email=cd['email'], password=cd['password'])
+            # print(type(user))
             if user:
+                print('+'*50)
                 login(request, user)
+                print('='*50)
                 return render(request, 'index.html')
             else:
-                return render(request, 'file.html', {'form': login_form})
+                return render(request, 'login1.html',{'form':login_form})
+                # return render(request, 'login1.html')
     if request.method == "GET":
-        login_form = LoginForm()
-        return render(request, 'login.html', {'form': login_form})
+        print('~'*50)
+        # email = request.GET.get('email')
+        # password = request.GET.get('password')
+        # print(email)
+        # print(password)
+        # user = authenticate(email=email, password=password)
+        # if user:
+        #     login(request, user)
+        #     print("1"*60)
+        #     return render(request, 'index.html')
+        # else:
+        #     print('+'*50)
+        #     return render(request, 'login.html')
 
-def estimate_url(requset):
+        login_form = LoginForm()
+        return render(request, 'login1.html',{'form':login_form})
+
+def estimate_url(requset,result):
     shorts = Qipaoshui.objects.all()
     # 评论数量
     counter = Qipaoshui.objects.all().count()
@@ -49,5 +70,7 @@ def estimate_url(requset):
     minus = queryset.filter(**condtions).count()
     return render(requset,'result.html',locals())
 
-def index_url(request,year):
+def index_url(request,index):
+    print("1"*60)
     return render(request, 'index.html')
+

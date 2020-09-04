@@ -50,7 +50,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+AUTHENTICATION_BACKENDS = [
+    'qipaoshui.models.MyBackend',
+]
 ROOT_URLCONF = 'MyDjango.urls'
 
 TEMPLATES = [

@@ -3,6 +3,10 @@
 今天是本周的第三天，今天先把视频又看了一遍，打算今天把作业二完成，对程序代码了逻辑结构还不是很清楚的时候就开始先把老师的代码抄过来，先理解一下看一看老师的思路，看代码听视频，听了三四遍才把要要点知识罗列差不多了，基本能够理解个来龙去脉了，以前听别人讲多读几遍就会有收获，这次也体会到了这个方法的效果，前提是动力十足的干劲。
 今天终于把作业全部完成了，思路也有一点启发，就是学习的能力太差了，进步太慢了，不断地锤炼自我，精进自我是唯一的选择，努力锤炼吧。
 
+
+https://github.com/liyang85/Python001-class01/blob/master/week01/NOTE.md
+
+
 1. requests结构
     git clone https://github.com/Alpha-Cheng/geekbangtrain
     cd geekbangtrain

@@ -1,8 +1,9 @@
-{% extends "home/base_layout.html" %} {% block title %}Welcome{% endblock %} 
+{% extends "base_layout.html" %} {% block title %}Welcome{% endblock %} 
 {% block head %}
-    {{ super() }}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/timeline.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/morris.css') }}">
+{% load static %}
+    {{ super }}
+    <link rel="stylesheet" href="{% static 'css/timeline.css' %}">
+    <link rel="stylesheet" href="{% static 'css/morris.css' %}">
 {% endblock %} 
 {% block content %}
 <div class="row">
@@ -544,8 +545,8 @@
 </div>
 <!-- /.row -->{% endblock %}
 {% block js %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='js/raphael-min.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/morris.min.js')}}"></script>
-    <script src="{{ url_for('static', filename='js/morris-data.js')}}"></script>
+    {{ super }}
+    <script src="{% static 'js/raphael-min.js' %}"></script>
+    <script src="{% static 'js/morris.min.js' %}"></script>
+    <script src="{% static 'js/morris-data.js' %}"></script>
 {% endblock %}

@@ -20,7 +20,8 @@ class QipaoshuiPipeline:
                         database = 'django',
                         charset = 'utf8mb4'
                         )
-        sql=''' CREATE TABLE IF NOT EXISTS `qipaoshui_qipaoshui`(
+        sql = 'DROP TABLE qipaoshui_qipaoshui;'
+        sql1 = ''' CREATE TABLE IF NOT EXISTS `qipaoshui_qipaoshui`(
                 `id` INT UNSIGNED AUTO_INCREMENT,
                 `date` varchar(30) not null,
                 `n_star` int(5) not null,
@@ -31,7 +32,7 @@ class QipaoshuiPipeline:
                 PRIMARY KEY ( `id` )
                 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;'''
                 # 'INSERT `qipaoshui_qipaoshui` SELECT * FROM `qipaoshui_base` GROUP BY RAND();'
-        sql1="INSERT INTO `qipaoshui_qipaoshui`(`date`, `n_star`,`sum_i`, `link`,`estimate`, `sentiment`) VALUES ('{date}','{n_star}','{sum_i}', '{link}','{estimate}','{sentiment}')".format(date=item['date'], n_star=item['n_star'], sum_i=item['sum_i'], link=item['link'], estimate=item['estimate'], sentiment=item['sentiment']);
+        sql2 = "INSERT INTO `qipaoshui_qipaoshui`(`date`, `n_star`,`sum_i`, `link`,`estimate`, `sentiment`) VALUES ('{date}','{n_star}','{sum_i}', '{link}','{estimate}','{sentiment}')".format(date=item['date'], n_star=item['n_star'], sum_i=item['sum_i'], link=item['link'], estimate=item['estimate'], sentiment=item['sentiment']);
         
         try:
             # 获得cursor游标对象
@@ -39,6 +40,7 @@ class QipaoshuiPipeline:
             # 操作的行数
             con1.execute(sql)
             con1.execute(sql1)
+            con1.execute(sql2)
             conn.commit()
         except Exception as e:
             print(sql1)

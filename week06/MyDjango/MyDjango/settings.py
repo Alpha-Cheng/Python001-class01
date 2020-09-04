@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     # 静态资源路径
     'django.contrib.staticfiles',
     # 自己注册的app
-    'index',
     'douban',
+    'index',
 ]
 # 中间件是request和response对象之间的钩子
 MIDDLEWARE = [
