@@ -19,7 +19,8 @@ def login_url(request):
         print('-'*50)
         login_form = LoginForm(request.POST)
         print(login_form)
-        if login_form.is_valid:
+        # 在这里犯过 .is_valid 没括号的错误，发现发起get请求的时候就报了post里的这个问题的错误
+        if login_form.is_valid():
             cd = login_form.cleaned_data
             print(cd)
             # 读取表单的返回值
