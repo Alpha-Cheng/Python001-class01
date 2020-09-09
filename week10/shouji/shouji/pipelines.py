@@ -20,7 +20,7 @@ class ShoujiPipeline:
                         database = 'django',
                         charset = 'utf8mb4'
                         )
-        sql = 'DROP TABLE IF EXISTS shouji_shouji;'
+        # sql = 'DROP TABLE IF EXISTS shouji_shouji;'
         sql1 = ''' CREATE TABLE IF NOT EXISTS `shouji_shouji`(
                 `id` INT UNSIGNED AUTO_INCREMENT,
                 `date` varchar(30) not null,
@@ -36,7 +36,7 @@ class ShoujiPipeline:
             # 获得cursor游标对象
             con1 = conn.cursor()
             # 操作的行数
-            con1.execute(sql)
+            # con1.execute(sql)
             con1.execute(sql1)
             con1.execute(sql2)
             conn.commit()
