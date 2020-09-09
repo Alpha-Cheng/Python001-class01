@@ -20,7 +20,7 @@ class ShoujiPipeline:
                         database = 'django',
                         charset = 'utf8mb4'
                         )
-        sql = 'DROP TABLE shouji_shouji;'
+        sql = 'DROP TABLE IF EXISTS shouji_shouji;'
         sql1 = ''' CREATE TABLE IF NOT EXISTS `shouji_shouji`(
                 `id` INT UNSIGNED AUTO_INCREMENT,
                 `date` varchar(30) not null,
