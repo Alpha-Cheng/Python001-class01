@@ -106,6 +106,17 @@
 ```text
 然后打开postman软件  官网是https://www.postman.com/
 
+单元测试
+https://docs.python.org/zh-cn/3/library/unittest.html
+
+https://pytorch.org/get-started/locally/
+https://pytorch.org/tutorials/
+https://www.python.org/dev/peps/pep-0249/
+https://zh-google-styleguide.readthedocs.io/en/latest/google-python-styleguide/python_style_rules/
+https://www.toptal.com/developers/sorting-algorithms
+https://www.toptal.com/developers/sorting-algorithms/bubble-sort
+
+
 
 这种不是表情符，是 html 字符实体
 https://www.w3school.com.cn/html/html_entities.asp

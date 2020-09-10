@@ -168,14 +168,15 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        {% for short in shorts %}
-                                            <tr>
-                                                <td>{{short.id}}</td>
-                                                <td>{{short.date}}</td>
-                                                <td>{{short.estimate}}</td>
-                                                <td>{{short.sentiment}}</td>
-                                            </tr>
-                                        {% endfor %}
+                                    {{ point }}
+                                    {% for short in shorts %}
+                                        <tr>
+                                            <td>{{short.id}}</td>
+                                            <td>{{short.date}}</td>
+                                            <td>{{short.estimate}}</td>
+                                            <td>{{short.sentiment}}</td>
+                                        </tr>
+                                    {% endfor %}
                                 </tbody>
                             </table>
                         </div>
@@ -221,11 +222,17 @@
     <script src="{% static 'js/morris-data.js' %}"></script>
     <script src="{% static 'js/jquery.js' %}"></script>
 {% endblock %}
-<script type="text/javascript" src="{% static 'js/jquery.js' %}">
+<!-- <script type="text/javascript" src="{% static 'js/jquery.js' %}">
     // ajax提交
     $(".submit").onclick(function(){
-        document.write("2"*10);
-        console.log("=========================");
+        let input_text = $(".input_text").val()
+        let start_time = $(".start_time").val()
+        let last_time = $(".last_time").val()
+        document.write(input_text)
+        document.write("-"*50)
+        document.write(start_time)
+        document.write("="*50)
+        document.write(last_time)
         $.ajax({
             url:"/reg",
             type:"get",
@@ -258,4 +265,4 @@
             }
         });
     });
-</script>
+</script> -->

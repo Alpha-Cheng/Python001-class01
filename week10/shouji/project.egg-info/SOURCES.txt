@@ -1,0 +1,13 @@
+setup.py
+project.egg-info/PKG-INFO
+project.egg-info/SOURCES.txt
+project.egg-info/dependency_links.txt
+project.egg-info/entry_points.txt
+project.egg-info/top_level.txt
+shouji/__init__.py
+shouji/items.py
+shouji/middlewares.py
+shouji/pipelines.py
+shouji/settings.py
+shouji/spiders/__init__.py
+shouji/spiders/smzdm.py
