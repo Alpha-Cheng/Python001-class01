@@ -16,20 +16,28 @@ class SmzdmSpider(scrapy.Spider):
             yield scrapy.Request(url = url, callback = self.parse, dont_filter=True)
     def parse(self, response):
         item = ShoujiItem()
-        link = Selector(response=response).xpath('//ul[@id="feed-main-list"]/li/div/div[1]/a/@href').extract()
+        link = Selector(response=response
+                        ).xpath('//ul[@id="feed-main-list"]/li/div/div[1]/a/@href').extract()
         for i in range(0,len(link)):
             yield scrapy.Request(url=link[i], meta={'item': item}, callback=self.parse2, dont_filter=True)
     def parse2(self, response):
         item = response.meta['item']
-        link = Selector(response=response).xpath('//div[@id="commentTabBlockNew"]/ul[2]/li/a/@href').extract()
+        link = Selector(response=response
+                        ).xpath('//div[@id="commentTabBlockNew"]/ul[2]/li/a/@href').extract()
         if len(link) == 0:
-            dates = Selector(response=response).xpath('//li[@class="comment_list"]/div[2]/div[1]/div[1]/meta/@content').extract()
+            dates = Selector(response=response
+                            ).xpath('//li[@class="comment_list"]/div[2]/div[1]/div[1]/meta/@content'
+                                    ).extract()
             def _sentiment(text):
                 return SnowNLP(text).sentiments
             for i in range(1,len(dates)+1):
-                date = Selector(response=response).xpath(f'//li[@class="comment_list"][{i}]/div[2]/div[1]/div[1]/meta/@content').extract_first()
+                date = Selector(response=response
+                                ).xpath(f'//li[@class="comment_list"][{i}]/div[2]/div[1]/div[1]/meta/@content'
+                                        ).extract_first()
                 if len(date) == 0:continue
-                estimates = pd.Series(Selector(response=response).xpath('//span[@itemprop="description"]/text()').extract())
+                estimates = pd.Series(Selector(response=response
+                                                ).xpath('//span[@itemprop="description"]/text()'
+                                                        ).extract())
                 for j in range(0,len(estimates)):
                     estimate = estimates[j].strip()
                     if len(estimate) == 0:continue
@@ -46,11 +54,15 @@ class SmzdmSpider(scrapy.Spider):
                 yield scrapy.Request(url =link[i], meta={'item':item}, callback = self.parse3, dont_filter=True)
     def parse3(self, response):
         item = response.meta['item']
-        dates = Selector(response=response).xpath('//li[@class="comment_list"]/div[2]/div[1]/div[1]/meta/@content').extract()
+        dates = Selector(response=response
+                        ).xpath(
+                            
+                            '//li[@class="comment_list"]/div[2]/div[1]/div[1]/meta/@content').extract()
         def _sentiment(text):
             return SnowNLP(text).sentiments
         for i in range(1,len(dates)+1):
-            date = Selector(response=response).xpath(f'//li[@class="comment_list"][{i}]/div[2]/div[1]/div[1]/meta/@content').extract_first()
+            date = Selector(response=response
+                            ).xpath(f'//li[@class="comment_list"][{i}]/div[2]/div[1]/div[1]/meta/@content').extract_first()
             if len(date) == 0:continue
             estimates = pd.Series(Selector(response=response).xpath('//span[@itemprop="description"]/text()').extract())
             for j in range(0,len(estimates)):
